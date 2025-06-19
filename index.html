@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - David Mayorga Escudero</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --bg-dark: #1f1f2e;
+      --bg-light: #f4f4f4;
+      --accent: #00bcd4;
+      --highlight: #ffcc00;
+      --text-dark: #e4e4e4;
+      --text-light: #333;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 60px; }
+    body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #222; /* color neutro, se ocultará detrás de los dividers */
+  color: var(--text-light);
+  scroll-behavior: smooth;
+}
+
+
+    .header {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  padding: 60px 20px 30px;
+  text-align: center;
+  color: var(--text-dark);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header h1 {
+  font-size: 2.8rem;
+  margin: 0;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.header p {
+  font-size: 1.3rem;
+  font-style: italic;
+  margin: 8px 0 25px;
+}
+
+.navbar {
+  background-color: rgba(255,255,255,0.05);
+  padding: 10px 15px;
+  border-radius: 12px;
+  display: inline-block;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.navbar a {
+  margin: 0 15px;
+  color: var(--highlight);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+    header.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    header h1 { font-size: 2.8rem; margin: 0; letter-spacing: 1px; }
+    header p { font-size: 1.2rem; margin-top: 10px; font-style: italic; }
+    nav { margin-top: 25px; }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--highlight);
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .navbar a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+    section {
+      padding: 80px 10vw;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section p,
+section h4,
+section ul,
+section h3 {
+  color: #ffffff;
+}
+
+
+    #sobre {
+    background: linear-gradient(to right, #2e3b4e, #34475a);
+    }
+    #cv {
+    background: linear-gradient(to right, #374a5e, #43586d);
+    }
+    #proyectos {
+    background: linear-gradient(to right, #3d4e60, #485b6f);
+    }
+    #contacto {
+    background: linear-gradient(to right, #2c3a4d, #38475b);
+    }
+
+    h2 {
+      color: var(--accent);
+      border-bottom: 3px solid var(--highlight);
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .skills span {
+      background: var(--accent);
+      color: white;
+      padding: 7px 15px;
+      margin: 8px 6px;
+      display: inline-block;
+      border-radius: 20px;
+      font-weight: bold;
+      transition: all 0.5s ease-out;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .skills span.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .skills span:hover {
+      transform: scale(1.1);
+      background: var(--highlight);
+      color: black;
+    }
+
+    .project {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .project.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 15px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .project h3 {
+      color: var(--highlight);
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin: 8px 0;
+    }
+
+    footer {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    footer.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #btn-up {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  background: linear-gradient(135deg, #00bcd4, #0097a7);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, background 0.3s ease;
+  display: none;
+  animation: pulse 2s infinite;
+}
+
+#btn-up:hover {
+  background: linear-gradient(135deg, #ffcc00, #ffb300);
+  color: black;
+  transform: scale(1.15);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,188,212, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(0,188,212, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,188,212, 0); }
+}
+
+    .divider {
+  position: relative;
+  width: 100%;
+  height: 120px; /* más alto para cubrir bien */
+  margin-top: -1px; /* evita línea fina blanca */
+  background: transparent;
+  overflow: hidden;
+}
+
+    .divider svg {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #cv ul {
+  list-style: none;
+  padding: 0;
+    }
+
+    #cv li {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    }
+
+    #cv li i {
+    margin-right: 10px;
+    font-size: 1.4rem;
+    width: 1.6rem;
+    color: var(--highlight);
+    transition: color 0.3s;
+    }
+
+    #cv li:hover i {
+    color: var(--accent);
+    }
+
+    .tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: minmax(50px, auto);
+  gap: 20px;
+  margin-top: 30px;
+  color: white;
+}
+
+.tech-grid div {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.tech-grid div i {
+  font-size: 1.4rem;
+  margin-right: 12px;
+  color: var(--highlight);
+}
+
+.tech-grid div:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.about-photo {
+  flex: 1 1 200px;
+  max-width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.about-text {
+  flex: 2 1 500px;
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-text {
+    width: 100%;
+  }
+
+  .about-photo {
+    max-width: 60%;
+  }
+}
+
+.project-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.project-image {
+  flex: 0 0 250px;
+  max-width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.project-info {
+  flex: 2 1 500px;
+}
+
+@media (max-width: 768px) {
+  .project-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .project-image {
+    max-width: 100%;
+  }
+
+  .project-info {
+    width: 100%;
+  }
+}
+
+.github-btn {
+  display: inline-block;
+  margin-top: 15px;
+  background-color: var(--accent);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.3s;
+}
+.github-btn:hover {
+  background-color: var(--highlight);
+  color: #000;
+  transform: translateY(-2px);
+}
+.github-btn i {
+  margin-right: 8px;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+.social-icons a {
+  display: inline-block;
+  margin: 0 12px;
+  font-size: 2rem;
+  color: var(--highlight);
+  transition: color 0.3s, transform 0.3s;
+}
+.social-icons a:hover {
+  color: var(--accent);
+  transform: scale(1.2);
+}
+
+#contacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+
+  <header class="header visible">
+  <div class="header-content">
+    <h1>David Mayorga Escudero</h1>
+    <p>Desarrollador Web Full-Stack</p>
+    <nav class="navbar">
+      <a href="#sobre">Sobre mí</a>
+      <a href="#cv">Habilidades</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+
+  <section id="sobre" class="observed">
+    <h2>Sobre mí</h2>
+    <h3>¿Quién es David?</h3>
+    <div class="about-container">
+        <img src="yo.jpg" alt="Foto de David" class="about-photo">
+        <div class="about-text">
+        <h4>Desarrollador Full-Stack en ciernes.</h4>
+        <p>Me llamo David y soy el tipo de desarrollador que construye tanto el escenario como el detrás de cámaras. Desde diseñar interfaces atractivas en el frontend, hasta estructurar bases de datos robustas en el backend, disfruto cada línea de código que conecta la experiencia del usuario con la lógica del servidor.</p>
+        <p>Después de cursar mis estudios sanitarios, me dí cuenta de que no era para mi, y decidí dedicarme a lo que realmente siempre me había gustado: la programación.</p>
+        <p>Fullstack por convicción, curioso e investigador por naturaleza. Me encanta resolver problemas, optimizar procesos y aprender nuevas tecnologías que me hagan mejor cada día. Si algo puede automatizarse, mejor. Y si puede hacerse con estilo, aún mejor!</p>
+        </div>
+    </div>
+  </section>
+
+  <div class="divider">
+  <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,0 L1200,0 L1200,60 C900,90 300,0 0,60 Z" fill="#374a5e"></path>
+  </svg>
+</div>
+
+  <section id="cv" class="observed">
+    <h2>Habilidades &amp; Herramientas</h2>
+    <h4>Entre las herramientas que he usado se encuentran:</h4>
+    <div class="tech-grid">
+        <div><i class="fab fa-html5"></i> HTML5</div>
+        <div><i class="fab fa-css3-alt"></i> CSS3</div>
+        <div><i class="fab fa-js-square"></i> JavaScript</div>
+        <div><i class="fab fa-php"></i> PHP</div>
+        <div><i class="fab fa-laravel"></i> Laravel</div>
+        <div><i class="fab fa-git-alt"></i> Git</div>
+        <div><i class="fab fa-github"></i> GitHub</div>
+        <div><i class="fas fa-database"></i> SQL</div>
+        <div><i class="fas fa-server"></i> phpMyAdmin</div>
+        <div><i class="fas fa-tools"></i> XAMPP / Laragon</div>
+        <div><i class="fas fa-code"></i> Visual Studio Code</div>
+    </div>
+    <h4>¿Que hago actualmente?</h4>
+    <p>Actualmente trabajo en proyectos propios y continúo formándome. Estoy en busca de una oportunidad para comenzar mi carrera como desarrollador en una empresa que me ofrezca esa oportunidad.</p>
+    <p>Estoy totalmente abierto a estudiar y aprender cualquier tecnología que se me proponga.</p>
+  </section>
+
+  <div class="divider">
+  <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,0 L1200,0 L1200,60 C900,90 300,0 0,60 Z" fill="#374a5e"></path>
+  </svg>
+</div>
+
+  <section id="proyectos" class="observed">
+    <h2>Proyectos</h2>
+    <div class="project observed">
+        <div class="project-container">
+            <img src="biblioteca-social.png" width="300px" alt="Proyecto 1" class="project-image">
+            <div class="project-info">
+                <h3>Biblioteca Social (red social para lectores)</h3>
+                <p>Red social sencilla donde los usuarios pueden registrarse y subir sus lecturas, tanto finalizadas como pendientes</p>
+                <p>Contiene un sistema de amistad para que los usuarios puedan interactuar entre sí.</p>
+                <p>Realizada en PHP y Laravel en el lado servidor y HTML, CSS y JavaScript en el lado cliente. Incluye integración con base de datos y uso de APIs para la búsqueda automática de libros</p>
+                <a href="https://github.com/DavidMayorga92/biblioteca_social" target="_blank" class="github-btn">
+                    <i class="fab fa-github"></i> Ver código en GitHub Repo
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="project observed">
+        <div class="project-container">
+            <img src="anillos.png" width="300px" alt="Proyecto 1" class="project-image">
+            <div class="project-info">
+                <h3>Proyecto invitados para boda</h3>
+                <p>Aplicación web desarrollada por interés propio donde el usuario puede llevar la cuenta de los invitados a su boda.</p>
+                <p>Diferencia entre invitados del novio y de la novia, los que confirman, los que dicen que no y los que están dudosos. Diferencia entre adultos, acompañantes y niños.</p>
+                <p>Contiene contadores para saber en todo momento cuantos invitados hay confirmados y cuantos no.</p>
+                <p>Aplicación desarrollada con PHP y Laravel en el lado servidor y HTML, CSS y JavaScript en el lado cliente. Incluye integración con base de datos.</p>
+                <a href="https://github.com/DavidMayorga92/proyecto-boda" target="_blank" class="github-btn">
+                    <i class="fab fa-github"></i> Ver código en GitHub Repo
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="project observed">
+        <div class="project-container">
+            <img src="gestion.png" width="300px" alt="Proyecto 1" class="project-image">
+            <div class="project-info">
+                <h3>Plataforma de gestión para empresa de servicios informáticos</h3>
+                    <p>Plataforma de gestión para empresa de servicios informáticos para tener un control más sencillo sobre todos los datos de sus clientes y servicios.</p>
+                    <p>Entre estos apartados se encuentran la gestión de usuarios (con roles como usuario y administrador), dominios, cuentas, hosting, renovaciones, mantenimientos, licencias, planes, etc.</p>
+                    <p>Contiene funciones como obtener los NS automáticamente, exportar a Excel el calendario o importar archivos, entre otros.</p>
+                    <p>Desarrollada con PHP y Laravel en el lado servidor y HTML, CSS y JavaScript en el lado cliente. Incluye integración con base de datos.</p>
+                    <a href="https://github.com/DavidMayorga92/gestor-empresa-servicios-inform-ticos" target="_blank" class="github-btn">
+                        <i class="fab fa-github"></i> Ver código en GitHub Repo
+                    </a>
+                </div>
+        </div>
+    </div>
+  </section>
+
+  <div class="divider">
+  <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,0 L1200,0 L1200,60 C900,90 300,0 0,60 Z" fill="#374a5e"></path>
+  </svg>
+</div>
+
+  <section id="contacto" class="observed">
+    <h2>Contacto</h2>
+    <h4>Teléfono o correo electrónico:</h4>
+    <p>📱 669033476</p>
+    <p>📧 davidmayorgaescudero92@gmail.com</p>
+    <div class="redes">
+        <h4>También pueden encontrarme en mis redes sociales:</h4>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/david-mayorga-escudero-51b868106/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/DavidMayorga92" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+  </section>
+
+  <footer class="observed">
+    <p>&copy; 2025 David Mayorga Escudero</p>
+  </footer>
+
+  <button id="btn-up" title="Volver arriba">⬆️</button>
+
+  <script>
+    // Smooth scroll nav links
+    document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Botón volver arriba
+    const btnUp = document.getElementById('btn-up');
+    window.addEventListener('scroll', () => {
+      btnUp.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    btnUp.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Intersection Observer para animaciones
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.observed').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
